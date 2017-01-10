@@ -6,7 +6,16 @@ $domain = $_POST['text'];
 $token = $_POST['token'];
 $user = $_POST['user_name'];
 
-if( $token == 'C6vVZxXoJzlIeDLTU943NMkm' || $token == 'HZ1YrUs1MRgxDF8cn60N9PMT' || $token == 'qimg5I8Ugim23eyCM0NipBc7' || $token = 'Pj0koI7ReFfkobwwlbclgtwL' || $token == 'Q2yLWcnTMHZfn1RNAqqvRzfQ' || $token = 'UzbxMw87O82z4C2OHOwc5jUl' ) {
+$accepted_tokens = [
+    'C6vVZxXoJzlIeDLTU943NMkm', // test token /history
+    'HZ1YrUs1MRgxDF8cn60N9PMT', // test token /wraith
+    'qimg5I8Ugim23eyCM0NipBc7', // test token /wraith_compare
+    'Pj0koI7ReFfkobwwlbclgtwL', // live token /history
+    'Q2yLWcnTMHZfn1RNAqqvRzfQ', // live token /wraith
+    'UzbxMw87O82z4C2OHOwc5jUl', // live token /wraith_compare
+];
+
+if( in_array( $token, $accepted_tokens ) ) {
 
     ob_end_clean();
     ob_start();
@@ -133,7 +142,7 @@ if( $token == 'C6vVZxXoJzlIeDLTU943NMkm' || $token == 'HZ1YrUs1MRgxDF8cn60N9PMT'
 
         error_log("History output: $log_output");
 
-        $reply = ":smile: " . $user . " I am happy to report that *<http://104.236.125.82/slack-commands/compare_".$user."_shots/gallery.html>* has been *generated*!";
+        $reply = ":smile: " . $user . " I am happy to report that *<http://104.236.125.82/slack-commands/compare_".$name."_shots/gallery.html>* has been *generated*!";
 
         $replyjson = json_encode([
             "response_type" => "in_channel",
