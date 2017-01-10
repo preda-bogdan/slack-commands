@@ -38,18 +38,7 @@ if( in_array( $token, $accepted_tokens ) ) {
             "response_type" => "in_channel",
             "text" => $reply
         ]);
-
-        $ch = curl_init();
-        curl_setopt_array($ch, [
-            CURLOPT_URL => $response_url,
-            CURLOPT_POST => 1,
-            CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POSTFIELDS => $replyjson
-        ]);
-
-        $resp = curl_exec($ch);
-        curl_close($ch);
+        curl_slack_response( $response_url, $replyjson );
 
         error_log("API response: $resp");
     } else if($command == '/wraith' && $domain != '') {
@@ -65,17 +54,7 @@ if( in_array( $token, $accepted_tokens ) ) {
             "text" => $reply
         ]);
 
-        $ch = curl_init();
-        curl_setopt_array($ch, [
-            CURLOPT_URL => $response_url,
-            CURLOPT_POST => 1,
-            CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POSTFIELDS => $replyjson
-        ]);
-
-        $resp = curl_exec($ch);
-        curl_close($ch);
+        curl_slack_response( $response_url, $replyjson );
 
         error_log("API response: $resp");
     } else if($command == '/wraith_compare' && $domain != '') {
@@ -86,16 +65,7 @@ if( in_array( $token, $accepted_tokens ) ) {
             "response_type" => "in_channel",
             "text" => "Generating config file ..."
         ]);
-        $ch = curl_init();
-        curl_setopt_array($ch, [
-            CURLOPT_URL => $response_url,
-            CURLOPT_POST => 1,
-            CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POSTFIELDS => $replyjson
-        ]);
-        $resp = curl_exec($ch);
-        curl_close($ch);
+        curl_slack_response( $response_url, $replyjson );
         $log_output = shell_exec('grunt gen-conf --type=compare --domain1='.$domain_array[0].' --domain2='.$domain_array[1].' --name='.$name.' ');
         $status = shell_exec('echo "$?"');
         if( $status != 0 ) {
@@ -106,16 +76,7 @@ if( in_array( $token, $accepted_tokens ) ) {
                         "text"=> $log_output
                 ]
             ]);
-            $ch = curl_init();
-            curl_setopt_array($ch, [
-                CURLOPT_URL => $response_url,
-                CURLOPT_POST => 1,
-                CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POSTFIELDS => $replyjson
-            ]);
-            $resp = curl_exec($ch);
-            curl_close($ch);
+            curl_slack_response( $response_url, $replyjson );
         }
 
         $log_output = shell_exec('wraith capture configs/compare_'.$name.'_config.yaml ');
@@ -128,16 +89,7 @@ if( in_array( $token, $accepted_tokens ) ) {
                     "text"=> $log_output
                 ]
             ]);
-            $ch = curl_init();
-            curl_setopt_array($ch, [
-                CURLOPT_URL => $response_url,
-                CURLOPT_POST => 1,
-                CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POSTFIELDS => $replyjson
-            ]);
-            $resp = curl_exec($ch);
-            curl_close($ch);
+            curl_slack_response( $response_url, $replyjson );
         }
 
         error_log("History output: $log_output");
@@ -148,34 +100,14 @@ if( in_array( $token, $accepted_tokens ) ) {
             "response_type" => "in_channel",
             "text" => $reply
         ]);
-        $ch = curl_init();
-        curl_setopt_array($ch, [
-            CURLOPT_URL => $response_url,
-            CURLOPT_POST => 1,
-            CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POSTFIELDS => $replyjson
-        ]);
-
-        $resp = curl_exec($ch);
-        curl_close($ch);
+        curl_slack_response( $response_url, $replyjson );
     } else {
         $replyjson = json_encode([
             "response_type" => "in_channel",
             "text" => ":disappointed: ".$user." I am afraid i can't respond to this request"
         ]);
 
-        $ch = curl_init();
-        curl_setopt_array($ch, [
-            CURLOPT_URL => $response_url,
-            CURLOPT_POST => 1,
-            CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POSTFIELDS => $replyjson
-        ]);
-
-        $resp = curl_exec($ch);
-        curl_close($ch);
+        curl_slack_response( $response_url, $replyjson );
     }
 
 
@@ -183,6 +115,20 @@ if( in_array( $token, $accepted_tokens ) ) {
     $msg = "The token for the slash command doesn't match. Check your script.";
     die($msg);
     echo $msg;
+}
+
+function curl_slack_response( $response_url, $replyjson ) {
+    $ch = curl_init();
+    curl_setopt_array($ch, [
+        CURLOPT_URL => $response_url,
+        CURLOPT_POST => 1,
+        CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POSTFIELDS => $replyjson
+    ]);
+
+    $resp = curl_exec($ch);
+    curl_close($ch);
 }
 
 
