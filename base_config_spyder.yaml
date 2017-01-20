@@ -1,0 +1,32 @@
+browser: "casperjs"
+
+domains:
+  demo: "https://demo.themeisle.com/"
+  dev: "http://dev2.themeisle.com/"
+
+imports: spyder/theme-slug.yaml
+
+resize_or_reload: "resize"
+
+fuzz: '20%'
+
+threshold: 5
+
+screen_widths:
+  - 320
+  - 768
+  - 1280
+
+directory: 'spider_shots'
+
+gallery:
+  template: 'basic_template'
+  thumb_width:  200
+  thumb_height: 200
+
+mode: diffs_first
+mode: alphanumeric
+
+highlight_color: red
+
+phantomjs_options: "--ignore-ssl-errors=true --ssl-protocol=any"

@@ -17,7 +17,7 @@ module.exports = function (grunt) {
             conf_file.directory = theme_slug + "_shots";
             conf_file.history_dir = theme_slug + "_history";
             grunt.file.write('configs/' + theme_slug + '_config.yaml', YAML.stringify(conf_file));
-        } else {
+        } else if( type == 'compare' ) {
             var domain1 = grunt.option('domain1') || 'domain1';
             var domain2 = grunt.option('domain2') || 'domain2';
             var name = grunt.option('name') || 'tmp';
@@ -34,6 +34,15 @@ module.exports = function (grunt) {
 
             conf_file.directory = "compare_" + name + "_shots";
             grunt.file.write('configs/compare_' + name + '_config.yaml', YAML.stringify(conf_file));
+        } else {
+            console.log('Spyder Case');
+            var theme_slug = grunt.option('theme') || 'theme_slug';
+            conf_file = grunt.file.readYAML('base_config_spyder.yaml');
+            conf_file.domains.demo = conf_file.domains.demo + theme_slug;
+            conf_file.domains.dev = conf_file.domains.dev + theme_slug;
+            conf_file.imports = 'spyders/' + theme_slug + '_paths.yml';
+            conf_file.directory = "spyder_" + theme_slug + "_shots";
+            grunt.file.write('configs/spyder_' + theme_slug + '_config.yaml', YAML.stringify(conf_file));
         }
     });
 
