@@ -1,2 +1,2 @@
-php themeisle-wraith-service -m=sitemaps
-php themeisle-wraith-service -m=all_history_spyder
+php themeisle-wraith-service.php -m=sitemaps
+php themeisle-wraith-service.php -m=all_history_spyder
