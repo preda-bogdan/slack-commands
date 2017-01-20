@@ -49,5 +49,5 @@ mode: alphanumeric
 
 highlight_color: red
 
-phantomjs_options: "--ignore-ssl-errors=true --ssl-protocol=any"
+phantomjs_options: "--ignore-ssl-errors=yes --ssl-protocol=tlsv1"
 
