@@ -9,7 +9,6 @@ $longopts  = array(
 );
 $options = getopt( $shortopts, $longopts );
 
-var_dump( empty($options) );
 if( empty($options) ) {
     if ( isset( $_POST['mode'] ) && $_POST['mode'] == 'sitemaps' ) {
         $json = file_get_contents('https://demo.themeisle.com/wp-json/sites/all');
@@ -21,7 +20,7 @@ if( empty($options) ) {
     }
 
     if ( isset( $_POST['mode'] ) && $_POST['mode'] == 'crawl' && isset( $_POST['slug'] ) && $_POST['slug'] != '' ) {
-        $site_slug = $options['s'];
+        $site_slug = $_POST['slug'];
         $paths_array = parse_slug_sitemaps($site_slug);
         make_yaml_file($site_slug, $paths_array);
     }
@@ -104,18 +103,3 @@ function parse_slug_sitemaps( $site_slug ) {
 
     return $paths_array;
 }
-//if( isset($options['s']) && isset($options['m']) && $options['m'] == 'compare' ) {
-//    $log_output = shell_exec('grunt gen-conf --type=compare --domain1=http://demo.themeisle.com/'.$options['s'].' --domain2=http://dev2.themeisle.com/'.$options['s'].' --name=travis_tests_'.$options['s'].' ');
-//    $status = shell_exec('echo "$?"');
-//    if( $status != 0 ) {
-//        echo 'ERROR! Generating Configuration File!';
-//    } else {
-//        $log_output = shell_exec('wraith capture configs/compare_travis_tests_'.$options['s'].'_config.yaml ');
-//        $status = shell_exec('echo "$?"');
-//        if( $status != 0 ) {
-//            echo 'ERROR! Generating report!';
-//        } else {
-//            echo 'Report Generated. http://104.236.125.82/slack-commands/compare_travis_tests_'.$options['s'].'_shots/gallery.html';
-//        }
-//    }
-//}
