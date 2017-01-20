@@ -59,6 +59,17 @@ if( empty($options) ) {
             echo "Done!\n";
         }
     }
+
+    if( isset( $options['m'] ) && $options['m'] == 'all_history' ) {
+        echo "Getting https://demo.themeisle.com/wp-json/sites/all ...\n";
+        $json = file_get_contents('https://demo.themeisle.com/wp-json/sites/all');
+        $sites_slug_list = json_decode($json);
+        foreach ($sites_slug_list as $site_slug) {
+            echo "Generating " . $site_slug . " history\n";
+            run_gen_conf('history_spyder', $site_slug);
+            echo "Done!\n";
+        }
+    }
 }
 
 function make_yaml_file( $site_slug, $paths_array ) {
