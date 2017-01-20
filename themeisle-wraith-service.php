@@ -112,7 +112,7 @@ function parse_slug_sitemaps( $site_slug ) {
         } else {
             $sitemaps = (array) $data;
             foreach ( $sitemaps['sitemap'] as $site_map_loc ) {
-                sleep(1);
+                msleep(0.5);
                 $map_crawl = (string) $site_map_loc->loc;
                 if ( ( $response_xml_data_link = file_get_contents( $map_crawl ) ) === false ) {
                     echo "Error fetching XML\n";
@@ -147,4 +147,8 @@ function parse_slug_sitemaps( $site_slug ) {
     }
 
     return $paths_array;
+}
+
+function msleep( $time ) {
+    usleep($time * 1000000);
 }
