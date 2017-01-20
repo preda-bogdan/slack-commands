@@ -84,13 +84,25 @@ function make_yaml_file( $site_slug, $paths_array ) {
 
 function run_gen_conf($type, $theme=null, $name=null, $domain1=null, $domain2=null) {
     if( $type == 'history' && $theme != null ) {
-        shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith history configs/' . $theme . '_config.yaml' );
+        $output = shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith history configs/' . $theme . '_config.yaml' );
+        error_log("Wraith History run_gen_conf()");
+        error_log($output);
+        echo $output;
     } else if( $type == 'history_spyder' && $theme != null ) {
-        shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith history configs/history_spyder_' . $theme . '_config.yaml' );
+        $output = shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith history configs/history_spyder_' . $theme . '_config.yaml' );
+        error_log("Wraith History Spyder run_gen_conf()");
+        error_log($output);
+        echo $output;
     } else if( $type == 'compare' && $domain1 != null && $domain2 != null && $name != null ) {
-        shell_exec('grunt gen-conf --type=compare --domain1='.$domain1.' --domain2='.$domain2.' --name='.$name.' ');
+        $output = shell_exec('grunt gen-conf --type=compare --domain1='.$domain1.' --domain2='.$domain2.' --name='.$name.' ');
+        error_log("Wraith Compare run_gen_conf()");
+        error_log($output);
+        echo $output;
     } else if ( $type == 'spyder' && $theme != null ) {
-        shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith capture configs/spyder_' . $theme . '_config.yaml' );
+        $output = shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith capture configs/spyder_' . $theme . '_config.yaml' );
+        error_log("Wraith Spyder run_gen_conf()");
+        error_log($output);
+        echo $output;
     }
 }
 
