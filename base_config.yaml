@@ -16,11 +16,6 @@ browser: "casperjs"
 domains:
   theme-slug:  "https://demo.themeisle.com/theme-slug"
 
-paths:
-  main:
-    path: /
-    selector: 'body'
-
 screen_widths:
   - 320
   - 480

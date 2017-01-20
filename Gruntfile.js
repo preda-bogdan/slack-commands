@@ -14,6 +14,7 @@ module.exports = function (grunt) {
             var theme_slug = grunt.option('theme') || 'theme_slug';
             conf_file = grunt.file.readYAML('base_config.yaml');
             conf_file.domains = { theme : 'https://demo.themeisle.com/' + theme_slug};
+            conf_file.paths = { main : '/' };
             conf_file.directory = "compare/" + theme_slug + "_shots";
             conf_file.history_dir = "compare/" + theme_slug + "_history";
             grunt.file.write('configs/' + theme_slug + '_config.yaml', YAML.stringify(conf_file));
