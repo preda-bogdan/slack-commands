@@ -133,7 +133,9 @@ function parse_slug_sitemaps( $site_slug ) {
                                     $tag_parts = explode( '/', $formated_url );
                                     $tag_parts = array_slice( $tag_parts, 0, -1 );
                                     $tag = str_replace( '-', '_', end( $tag_parts ) );
-                                    $paths_array[$tag] = $formated_url;
+                                    if($tag != '') {
+                                        $paths_array[$tag] = $formated_url;
+                                    }
                                 }
                             }
                         }
