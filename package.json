@@ -1,5 +1,5 @@
 {
-  "name": "Themeisle Slack Commands & Wraith Service",
+  "name": "themeisle-slack-commands-wraith-service",
   "version": "1.0.0",
   "description": "Services and endpoints for accessing Wraith Commands from Slack and Travis",
   "main": "Gruntfile.js",
