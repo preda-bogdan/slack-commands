@@ -89,6 +89,7 @@ function run_gen_conf($type, $theme=null, $name=null, $domain1=null, $domain2=nu
         error_log($output);
         echo $output;
     } else if( $type == 'history_spyder' && $theme != null ) {
+        echo 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith history configs/history_spyder_' . $theme . '_config.yaml';
         $output = shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith history configs/history_spyder_' . $theme . '_config.yaml' );
         error_log("Wraith History Spyder run_gen_conf()");
         error_log($output);
