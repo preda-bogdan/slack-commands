@@ -26,9 +26,9 @@ if( in_array( $token, $accepted_tokens ) ) {
     ob_end_flush();
     flush();
 
-    if($command == '/history' && $domain != '') {
+    if( $command == '/history' && $domain != '' ) {
         $output = '';
-        $output .= shell_exec('grunt gen-conf --theme=' . $domain . ' && wraith history configs/' . $domain . '_config.yaml');
+        $output .= shell_exec( 'grunt gen-conf --theme=' . $domain . ' && wraith history configs/' . $domain . '_config.yaml' );
 
         error_log("History output: $output");
 
@@ -38,14 +38,14 @@ if( in_array( $token, $accepted_tokens ) ) {
             "response_type" => "in_channel",
             "text" => $reply
         ]);
-        curl_slack_response( $response_url, $replyjson );
+        $resp = curl_slack_response( $response_url, $replyjson );
 
         error_log("API response: $resp");
-    } else if($command == '/wraith' && $domain != '') {
+    } else if( $command == '/wraith' && $domain != '' ) {
         $output = '';
-        $output .= shell_exec('wraith latest configs/' . $domain . '_config.yaml');
+        $output .= shell_exec( 'wraith latest configs/' . $domain . '_config.yaml' );
 
-        error_log("History output: $output");
+        error_log( "History output: $output" );
 
         $reply = ":smile: " . $user . " I am happy to report that *<http://104.236.125.82/slack-commands/" . $domain . "_shots/gallery.html>* has been *generated*!";
 
@@ -54,9 +54,9 @@ if( in_array( $token, $accepted_tokens ) ) {
             "text" => $reply
         ]);
 
-        curl_slack_response( $response_url, $replyjson );
+        $resp = curl_slack_response( $response_url, $replyjson );
 
-        error_log("API response: $resp");
+        error_log( "API response: $resp" );
     } else if($command == '/wraith_compare' && $domain != '') {
         $domain_array =  explode(' vs ',$domain);
         $name = str_replace('.','_',$user);
