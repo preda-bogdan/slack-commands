@@ -11,7 +11,7 @@
 #
 ##############################################################
 ##############################################################
-browser: "phantomjs"
+browser: 'phantomjs'
 
 domains:
   theme-slug:  "https://demo.themeisle.com/theme-slug"
@@ -25,9 +25,9 @@ before_capture: 'javascript/wait--phantom.js'
 
 directory: 'theme-slug_shots'
 
-history_dir: "theme-slug_history"
+history_dir: 'theme-slug_history'
 
-resize_or_reload: "resize"
+resize_or_reload: 'resize'
 
 fuzz: '20%'
 
@@ -39,11 +39,10 @@ gallery:
   thumb_height: 200
 
 mode: diffs_first
-mode: alphanumeric
 
 # verbose: true
 
 highlight_color: red
 
-phantomjs_options: "--ignore-ssl-errors=true --ssl-protocol=any"
+phantomjs_options: "--ignore-ssl-errors=true --ssl-protocol=tlsv1"
 
