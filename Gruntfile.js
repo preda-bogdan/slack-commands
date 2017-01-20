@@ -14,8 +14,8 @@ module.exports = function (grunt) {
             var theme_slug = grunt.option('theme') || 'theme_slug';
             conf_file = grunt.file.readYAML('base_config.yaml');
             conf_file.domains = { theme : 'https://demo.themeisle.com/' + theme_slug};
-            conf_file.directory = theme_slug + "_shots";
-            conf_file.history_dir = theme_slug + "_history";
+            conf_file.directory = "compare/" + theme_slug + "_shots";
+            conf_file.history_dir = "compare/" + theme_slug + "_history";
             grunt.file.write('configs/' + theme_slug + '_config.yaml', YAML.stringify(conf_file));
         } else if( type == 'compare' ) {
             var domain1 = grunt.option('domain1') || 'domain1';
