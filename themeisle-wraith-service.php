@@ -8,37 +8,45 @@ $longopts  = array(
     "slug::",    // Optional value
 );
 $options = getopt( $shortopts, $longopts );
-
 if( empty($options) ) {
     if ( isset( $_POST['mode'] ) && $_POST['mode'] == 'sitemaps' ) {
+        echo "Getting https://demo.themeisle.com/wp-json/sites/all ...\n";
         $json = file_get_contents('https://demo.themeisle.com/wp-json/sites/all');
         $sites_slug_list = json_decode($json);
         foreach ($sites_slug_list as $site_slug) {
+            echo "Generating " . $site_slug . ".yml\n";
             $paths_array = parse_slug_sitemaps($site_slug);
             make_yaml_file($site_slug, $paths_array);
         }
+        echo "Done!\n";
     }
 
     if ( isset( $_POST['mode'] ) && $_POST['mode'] == 'crawl' && isset( $_POST['slug'] ) && $_POST['slug'] != '' ) {
         $site_slug = $_POST['slug'];
+        echo "Generating " . $site_slug . ".yml\n";
         $paths_array = parse_slug_sitemaps($site_slug);
         make_yaml_file($site_slug, $paths_array);
+        echo "Done!\n";
     }
 } else {
     if ( isset( $options['m'] ) && $options['m'] == 'sitemaps' ) {
-
+        echo "Getting https://demo.themeisle.com/wp-json/sites/all ...\n";
         $json = file_get_contents('https://demo.themeisle.com/wp-json/sites/all');
         $sites_slug_list = json_decode($json);
         foreach ($sites_slug_list as $site_slug) {
+            echo "Generating " . $site_slug . ".yml\n";
             $paths_array = parse_slug_sitemaps($site_slug);
             make_yaml_file($site_slug, $paths_array);
+            echo "Done!\n";
         }
     }
 
     if (isset($options['m']) && $options['m'] == 'crawl' && isset($options['s']) && $options['s'] != '') {
         $site_slug = $options['s'];
+        echo "Generating " . $site_slug . ".yml\n";
         $paths_array = parse_slug_sitemaps($site_slug);
         make_yaml_file($site_slug, $paths_array);
+        echo "Done!\n";
     }
 }
 
