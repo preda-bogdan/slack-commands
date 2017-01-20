@@ -60,7 +60,7 @@ if( empty($options) ) {
         }
     }
 
-    if( isset( $options['m'] ) && $options['m'] == 'all_history' ) {
+    if( isset( $options['m'] ) && $options['m'] == 'all_history_spyder' ) {
         echo "Getting https://demo.themeisle.com/wp-json/sites/all ...\n";
         $json = file_get_contents('https://demo.themeisle.com/wp-json/sites/all');
         $sites_slug_list = json_decode($json);
