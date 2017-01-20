@@ -11,20 +11,17 @@
 #
 ##############################################################
 ##############################################################
-browser: "casperjs"
+browser: "phantomjs"
 
 domains:
   theme-slug:  "https://demo.themeisle.com/theme-slug"
 
 screen_widths:
   - 320
-  - 480
   - 768
-  - 1024
   - 1280
-  - 1920
 
-before_capture: 'javascript/wait--casper.js'
+before_capture: 'javascript/wait--phantom.js'
 
 directory: 'theme-slug_shots'
 
