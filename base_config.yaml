@@ -44,5 +44,5 @@ verbose: true
 
 highlight_color: red
 
-phantomjs_options: "--ssl-protocol=tlsv1 --ignore-ssl-errors=true"
+phantomjs_options: "--ssl-protocol=tlsv1 --ignore-ssl-errors=yes"
 
