@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             conf_file.directory = "compare_spyder/" + theme_slug + "_shots";
             conf_file.history_dir = "compare_spyder/" + theme_slug + "_history";
             conf_file.imports = 'spyders/' + theme_slug + '_paths.yml';
-            grunt.file.write('configs/' + theme_slug + '_config.yaml', YAML.stringify(conf_file));
+            grunt.file.write('configs/history_spyder_' + theme_slug + '_config.yaml', YAML.stringify(conf_file));
         } else if( type == 'compare' ) {
             var domain1 = grunt.option('domain1') || 'domain1';
             var domain2 = grunt.option('domain2') || 'domain2';

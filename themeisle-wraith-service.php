@@ -85,6 +85,8 @@ function make_yaml_file( $site_slug, $paths_array ) {
 function run_gen_conf($type, $theme=null, $name=null, $domain1=null, $domain2=null) {
     if( $type == 'history' && $theme != null ) {
         shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith history configs/' . $theme . '_config.yaml' );
+    } else if( $type == 'history_spyder' && $theme != null ) {
+        shell_exec( 'grunt gen-conf --type=' . $type . ' --theme=' . $theme . ' && wraith history configs/history_spyder_' . $theme . '_config.yaml' );
     } else if( $type == 'compare' && $domain1 != null && $domain2 != null && $name != null ) {
         shell_exec('grunt gen-conf --type=compare --domain1='.$domain1.' --domain2='.$domain2.' --name='.$name.' ');
     } else if ( $type == 'spyder' && $theme != null ) {
