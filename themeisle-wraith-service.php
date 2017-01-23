@@ -28,6 +28,15 @@ if( empty($options) ) {
         make_yaml_file($site_slug, $paths_array);
         echo "Done!\n";
     }
+
+    if ( isset( $_POST['mode'] ) && $_POST['mode'] == 'latest' && isset( $_POST['slug'] ) && $_POST['slug'] != '' ) {
+        $site_slug = $_POST['slug'];
+        echo "Running /wraith latest configs/history_spyder_" . $site_slug . "_config.yml\n";
+        $output .= shell_exec( 'wraith latest configs/history_spyder_' . $domain . '_config.yaml' );
+        error_log("Travis Wraith output: $output");
+        echo $output."\n";
+        echo "Done!\n";
+    }
 } else {
     if ( isset( $options['m'] ) && $options['m'] == 'sitemaps' ) {
         echo "Getting https://demo.themeisle.com/wp-json/sites/all ...\n";
