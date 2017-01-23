@@ -40,8 +40,8 @@ if( empty($options) ) {
 
     if ( isset( $_POST['mode'] ) && $_POST['mode'] == 'compare' && isset( $_POST['slug'] ) && $_POST['slug'] != '' ) {
         $site_slug = $_POST['slug'];
-        echo "Running /wraith compare configs/compare_spyder_" . $site_slug . "_config.yml\n";
-        $output = shell_exec( 'wraith compare configs/compare_spyder_' . $site_slug . '_config.yaml' );
+        echo "Running /wraith capture configs/compare_spyder_" . $site_slug . "_config.yml\n";
+        $output = shell_exec( 'wraith capture configs/capture_spyder_' . $site_slug . '_config.yaml' );
         error_log("Travis Wraith output: $output");
         echo $output."\n";
         echo "Done!\n";
